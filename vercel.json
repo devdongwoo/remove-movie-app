@@ -1,4 +1,3 @@
 {
-  "devCommand": "npm run dev",
-  "bulidCommand": "npm run build"
+  "devCommand": "npm run dev"
 }
