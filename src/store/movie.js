@@ -19,9 +19,13 @@ export const searchMovies = async (page) => {
     store.state.message = "";
   }
   try {
-    const res = await fetch(
-      `https://omdbapi.com?apikey=e0acc7b&s=${store.state.searchText}&page=${page}`
-    );
+    const res = await fetch("/api/movie", {
+      method: "POST",
+      body: JSON.stringify({
+        title: store.state.searchText,
+        page,
+      }),
+    });
     //res를 객체 분해 할당
     const { Search, totalResults, Response, Error } = await res.json();
 
@@ -41,7 +45,12 @@ export const searchMovies = async (page) => {
 
 export const getMovieDetails = async (id) => {
   try {
-    const res = await fetch(`https://omdbapi.com?apikey=e0acc7b&i=${id}`);
+    const res = await fetch("/api/movie", {
+      method: "POST",
+      body: JSON.stringify({
+        id,
+      }),
+    });
     store.state.movie = await res.json();
   } catch (error) {
     console.log("getMovieDetails error:", error);
